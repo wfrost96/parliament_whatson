@@ -1,0 +1,121 @@
+body{
+  background-color: BlanchedAlmond;
+}
+
+.blue-square-container {
+  text-align: center;
+}
+
+table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #1DA1F2;
+  color: white;
+}
+
+/*deleting word button*/
+
+input.delete-word-submit {
+  width: 100%;
+  background-color: red;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input.delete-word-submit:hover {
+  background-color: red;
+}
+
+/*form for adding a new word*/
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input.add-new-word-submit {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input.add-new-word-submit:hover {
+  background-color: #45a049;
+}
+
+.add-new-word-form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*all of the below is for the Parly agenda table*/
+
+table {
+       font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+       border-collapse: collapse;
+       max-width: 600px;
+     }
+
+table td, th {
+ border: 1px solid #ddd;
+ padding: 8px;
+ text-align: center;
+ vertical-align: middle;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+#lords_table thead {
+ padding-top: 12px;
+ padding-bottom: 12px;
+ text-align: left;
+ background-color: #b50938;
+ color: white;
+}
+
+#commons_table thead {
+ padding-top: 12px;
+ padding-bottom: 12px;
+ text-align: left;
+ background-color: #006e46;
+ color: white;
+}
