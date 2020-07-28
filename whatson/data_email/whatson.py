@@ -8,25 +8,24 @@ import time
 link_base = "https://calendar.parliament.uk/calendar/"
 links = []
 dates = []
-for i in range(1,7): #if it's Friday, use (3,10); if it's Sunday, use (0,10)
-    datetoday = datetime.datetime.utcnow().date()
-    #print(datetoday)
-
-    #the below two lines allow you to use whatever start date you want, otherwise programme assumes today
-    #mydatetoday = "2020-06-02"
-    #datetoday = datetime.datetime.strptime(mydatetoday, '%Y-%m-%d').date()
-
-    future_date_raw = datetoday + datetime.timedelta(days=i)
+for i in range(0,10):
+    future_date_raw = datetime.datetime.utcnow().date() + datetime.timedelta(days=i)
     #print(future_date_raw)
-
     day = future_date_raw.strftime('%a')
-    future_date = future_date_raw.strftime('%Y/%m/%d')
-    dates.append(future_date)
-    dates.append(future_date) #nb, done twice as there is a day in the Commons and a day in the Lords
-    link_1 = link_base + "Commons/All/" + future_date + "/Daily"
-    links.append(link_1)
-    link_2 = link_base + "Lords/All/" + future_date + "/Daily"
-    links.append(link_2)
+    if day == "Sat":
+        break
+    else:
+        future_date = future_date_raw.strftime('%Y/%m/%d')
+        dates.append(future_date)
+        dates.append(future_date) #nb, done twice as there is a day in the Commons and a day in the Lords
+        link_1 = link_base + "Commons/All/" + future_date + "/Daily"
+        links.append(link_1)
+        link_2 = link_base + "Lords/All/" + future_date + "/Daily"
+        links.append(link_2)
+#print(links)
+#print(dates)
+"""dates.append("2020/5/18")
+links.append("https://calendar.parliament.uk/calendar/Commons/All/2020/5/18/Daily")"""
 
 events_list = []
 for i in range(0, len(links)):
@@ -100,7 +99,6 @@ for i in range(0, len(links)):
                     continue
                 elif len(item)==1:
                     str1 += item.text
-                    #str1 += ""
                 else:
                     str1 += item.strip()
             daily_agenda.append(str1)
@@ -271,6 +269,17 @@ for day in events_list:
 events_list = events_list_new
 #print(len(events_list))
 
+monday_commons_big_str = ""
+tuesday_commons_big_str = ""
+wednesday_commons_big_str = ""
+thursday_commons_big_str = ""
+friday_commons_big_str = ""
+monday_lords_big_str = ""
+tuesday_lords_big_str = ""
+wednesday_lords_big_str = ""
+thursday_lords_big_str = ""
+friday_lords_big_str = ""
+
 for i in range(0, len(events_list)):
     #print(i)
     if i % 2 == 0: #this is commons
@@ -281,18 +290,12 @@ for i in range(0, len(events_list)):
             monday_commons_agenda = events_list[i]
             monday_commons_agenda.pop(0)
             mynumber = int((len(monday_commons_agenda))/3)
-            monday_commons_big_str = ""
             item = "<table id='commons_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
-            mystr = ""
             for j in range(0, mynumber):
                 item += "<tr>"
                 for k in range(0, 3):
-                    #print(k)
                     item += "<td>"
                     item += str(monday_commons_agenda[0])
-                    #print(monday_commons_agenda[0])
-                    if monday_commons_agenda[0] == "THEN":
-                        mystr = "boo"
                     item += "</td>"
                     events_list[i].pop(0)
                 item += "</tr>"
@@ -304,7 +307,6 @@ for i in range(0, len(events_list)):
             tuesday_commons_agenda = events_list[i]
             tuesday_commons_agenda.pop(0)
             mynumber = int((len(tuesday_commons_agenda))/3)
-            tuesday_commons_big_str = ""
             item = "<table id='commons_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -322,7 +324,6 @@ for i in range(0, len(events_list)):
             wednesday_commons_agenda = events_list[i]
             wednesday_commons_agenda.pop(0)
             mynumber = int((len(wednesday_commons_agenda))/3)
-            wednesday_commons_big_str = ""
             item = "<table id='commons_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -340,7 +341,6 @@ for i in range(0, len(events_list)):
             thursday_commons_agenda = events_list[i]
             thursday_commons_agenda.pop(0)
             mynumber = int((len(thursday_commons_agenda))/3)
-            thursday_commons_big_str = ""
             item = "<table id='commons_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -358,7 +358,6 @@ for i in range(0, len(events_list)):
             friday_commons_agenda = events_list[i]
             friday_commons_agenda.pop(0)
             mynumber = int((len(friday_commons_agenda))/3)
-            friday_commons_big_str = ""
             item = "<table id='commons_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -381,7 +380,6 @@ for i in range(0, len(events_list)):
             #print(monday_lords_agenda)
             mynumber = int((len(events_list[i])/3))
             #print(mynumber)
-            monday_lords_big_str = ""
             item = "<table id='lords_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -402,7 +400,6 @@ for i in range(0, len(events_list)):
             #print(tuesday_lords_agenda)
             mynumber = int((len(events_list[i])/3))
             #print(mynumber)
-            tuesday_lords_big_str = ""
             item = "<table id='lords_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -423,7 +420,6 @@ for i in range(0, len(events_list)):
             #print(wednesday_lords_agenda)
             mynumber = int((len(events_list[i])/3))
             #print(mynumber)
-            wednesday_lords_big_str = ""
             item = "<table id='lords_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -444,7 +440,6 @@ for i in range(0, len(events_list)):
             #print(thursday_lords_agenda)
             mynumber = int((len(events_list[i])/3))
             #print(mynumber)
-            thursday_lords_big_str = ""
             item = "<table id='lords_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
@@ -465,7 +460,6 @@ for i in range(0, len(events_list)):
             #print(friday_lords_agenda)
             mynumber = int((len(events_list[i])/3))
             #print(mynumber)
-            friday_lords_big_str = ""
             item = "<table id='lords_table'><thead><td><p>Time</p></td><td><p>Event</p></td><td><p>Description</p></td></thead><tbody>"
             for j in range(0, mynumber):
                 item += "<tr>"
